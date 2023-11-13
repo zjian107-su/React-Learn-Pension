@@ -66,3 +66,19 @@ Originally, I wanted to write css class for each component. But later I chose to
 
 ## Conclusion
 It was a fun little project to code. It involved math, global context management, local state management, lifecycle management, props, responsive design, UI design styling, graphs, forms and validators. If there were more time, I would wish to dig into Jest testing for React. I also wish I committed more often as smaller chunks of changes.
+
+## Feedbacks
+### Pros:
+•⁠  ⁠TypeScript used for the most part, there were some jsx files which could've been tsx but this could've been an accident and isn't a major point
+•⁠  ⁠Use of context API which showed knowledge of React
+•⁠  ⁠Completion of the stretch to add interest
+
+### Other feedback:
+•⁠  ⁠Although DaisyUI was used the styling wasn't really user friendly
+•⁠  ⁠let declarations instead of constants although this isn't too major
+•⁠  ⁠No tests of the business logic which was separated out
+•⁠  ⁠No tests of components themselves
+•⁠  ⁠Little error handling and validation
+
+
+In a nutshell, add validation and tests
