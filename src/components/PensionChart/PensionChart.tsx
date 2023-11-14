@@ -1,8 +1,8 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import pensionCalculatorService from "../../services/pensionCalculatorService";
 import PensionProjection from "../../interfaces/pensionProjection";
 import pensionMinService from "../../services/pensionMinService";
-import { PensionContext } from "../../context/PensionContext";
+import { usePensionContext } from "../../context/PensionContext";
 
 import {
   LineChart,
@@ -20,7 +20,7 @@ type Props = {
 };
 
 function PensionChart({ className = "" }: Props) {
-  const { pensionData } = useContext(PensionContext);
+  const { pensionData } = usePensionContext();
   const [projections, setProjections] = useState<PensionProjection[]>([]);
   const [minNum, setMinNum] = useState(0);
 

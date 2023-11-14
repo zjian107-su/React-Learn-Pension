@@ -1,12 +1,12 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import pensionMinService from "../../services/pensionMinService";
-import { PensionContext } from "../../context/PensionContext";
+import { usePensionContext } from "../../context/PensionContext";
 
 // this is a test component to test the global state
 // when you click the button, it should change the gloobal state
 function PensionTest() {
   const [retirementAmount, setRetirementAmount] = useState(0);
-  const { pensionData, setPensionData, devMode } = useContext(PensionContext);
+  const { pensionData, setPensionData, devMode } = usePensionContext();
 
   const clickHandler = () => {
     setPensionData({

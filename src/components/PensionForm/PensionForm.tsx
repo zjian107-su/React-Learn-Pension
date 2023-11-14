@@ -1,6 +1,9 @@
 import React, { useEffect, useContext } from "react";
 import { useForm } from "react-hook-form";
-import { PensionContext } from "../../context/PensionContext";
+import {
+  PensionContext,
+  usePensionContext,
+} from "../../context/PensionContext";
 import CalculatorInput from "../../interfaces/calculatorInput";
 
 type Props = {
@@ -8,7 +11,7 @@ type Props = {
 };
 
 function PensionForm({ className = "" }: Props) {
-  const { pensionData, setPensionData } = useContext(PensionContext);
+  const { pensionData, setPensionData } = usePensionContext();
 
   const {
     register,
