@@ -1,13 +1,30 @@
-import CompoundInterestsData from "../interfaces/compoundInterestsData";
+import CalculatorInput from "../interfaces/calculatorInput";
 
-const calculateCompoundInterest = (
-  principal: number,
-  rate: number,
-  time: number
-): CompoundInterestsData => {
-  const amount = principal * Math.pow(1 + rate / 100, time);
-  const interest = amount - principal;
-  return { amount, interest };
+const calculatePension = (
+  currentAge: number,
+  retireAge: number,
+  deathAge: number,
+  monthlyInput: number,
+  desiredRetireIncome: number,
+  yearlyInterest: number,
+  transferredPension: number
+): Number[] => {
+  let timeBeforeRetire = retireAge - currentAge;
+  let timeBeforeDeath = deathAge - currentAge;
+  let pensionArray = Array.from({ length: timeBeforeDeath }, () => 0);
+  pensionArray[0] = transferredPension;
+
+  for (let i = 1; i < timeBeforeRetire; i++) {
+    pensionArray[i] =
+      pensionArray[i - 1] * (1 + yearlyInterest) + monthlyInput * 12;
+  }
+
+  for (let i = timeBeforeRetire; i < timeBeforeDeath; i++) {
+    pensionArray[i] =
+      pensionArray[i - 1] * (1 + yearlyInterest) - desiredRetireIncome;
+  }
+
+  return pensionArray;
 };
 
-export default calculateCompoundInterest;
+export default calculatePension;

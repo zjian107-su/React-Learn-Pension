@@ -62,4 +62,4 @@ compoundInterestData: amount and interest
 
 3. Third step: using service to hide logic from the UI functions 
 
-4. Fourth step: Implementing math for testing and understanding
+4. Fourth step: Implementing math for testing and understanding. I think test the number and understand the business logic would help me to build more robust application. So I write down all the numbers the pension can progress so that I don't miss a year in starting pension investment or retirement. In order to make it more clean, I did some changes to interfaces.
