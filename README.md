@@ -60,6 +60,6 @@ PensionInput: the data format that we expect from the form
 PensionProjection: the relationship between age and pot pension number
 compoundInterestData: amount and interest
 
-3. Third step: using service to hide logic from the UI functions 
+3. Third step: using service to hide logic from the UI functions. Ideally, I want to use custom hook to manage states, and then use services to manages logics that can be used within the custom hook.
 
 4. Fourth step: Implementing math for testing and understanding. I think test the number and understand the business logic would help me to build more robust application. So I write down all the numbers the pension can progress so that I don't miss a year in starting pension investment or retirement. In order to make it more clean, I did some changes to interfaces.
