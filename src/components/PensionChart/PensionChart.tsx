@@ -3,6 +3,7 @@ import "./PensionChart.css";
 import CalculatorInput from "../../interfaces/calculatorInput";
 import calculatePension from "../../services/pensionCalculatorService";
 import PensionProjection from "../../interfaces/pensionProjection";
+import pensionMinService from "../../services/pensionMinService";
 
 import {
   LineChart,
@@ -12,6 +13,7 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
+  ReferenceLine,
 } from "recharts";
 
 function PensionChart() {
@@ -26,6 +28,7 @@ function PensionChart() {
   });
 
   const [projections, setprojections] = useState<PensionProjection[]>([]);
+  const [minNum, setMinNumber] = useState(0);
 
   useEffect(() => {
     const projections = calculatePension(
@@ -37,8 +40,18 @@ function PensionChart() {
       inputData.yearlyInterest,
       inputData.transferredPension
     );
-    console.log(projections);
+    const minNum = pensionMinService(
+      inputData.currentAge,
+      inputData.retireAge,
+      inputData.deathAge,
+      inputData.monthlyInput,
+      inputData.desiredRetireIncome,
+      inputData.yearlyInterest,
+      inputData.transferredPension
+    );
+
     setprojections(projections);
+    setMinNumber(minNum);
   }, [inputData]);
 
   return (
@@ -84,6 +97,7 @@ function PensionChart() {
             stroke="#8884d8"
             activeDot={{ r: 8 }}
           />
+          <ReferenceLine y={minNum} label="Minimum Required" stroke="red" />
         </LineChart>
       </div>
     </>

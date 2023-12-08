@@ -18,7 +18,7 @@ function PensionLine() {
   const [retirementAmount, setRetirementAmount] = useState(0);
 
   useEffect(() => {
-    let updatedRetiredmentAmount: PensionProjection[] = pensionMinService(
+    let updatedRetiredmentAmount: number = pensionMinService(
       inputData.currentAge,
       inputData.retireAge,
       inputData.deathAge,
@@ -27,7 +27,7 @@ function PensionLine() {
       inputData.yearlyInterest,
       inputData.transferredPension
     );
-    setRetirementAmount(updatedRetiredmentAmount[0].pensionAmount);
+    setRetirementAmount(updatedRetiredmentAmount);
   }, [retirementAmount]);
 
   return (

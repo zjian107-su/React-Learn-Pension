@@ -8,6 +8,9 @@ const usePensionCalculator = (initialValues: CalculatorInput) => {
   const [pensionProjection, setPensionProjection] = useState<
     PensionProjection[]
   >([]);
+  const [pensionMinProjection, setPensionMinProjection] = useState<
+    PensionProjection[]
+  >([]);
 
   useEffect(() => {
     const projection: PensionProjection[] = calculatePension(

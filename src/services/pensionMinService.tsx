@@ -8,7 +8,7 @@ const calculatePension = (
   desiredRetireIncome: number,
   yearlyInterest: number,
   transferredPension: number
-): PensionProjection[] => {
+): number => {
   let pensionArray: PensionProjection[] = [];
   let pensionAmount: number = 0;
 
@@ -19,7 +19,7 @@ const calculatePension = (
       (pensionAmount + desiredRetireIncome) / (1 + yearlyInterest);
   }
 
-  return pensionArray;
+  return pensionArray[0].pensionAmount;
 };
 
 export default calculatePension;

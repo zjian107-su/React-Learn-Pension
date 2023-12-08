@@ -8,7 +8,7 @@ function App() {
     <>
       <h1>Daniel's Pension Tracker</h1>
       <br />
-      <PensionLine />
+      {/* <PensionLine /> */}
       <br />
       <PensionChart />
       <br />
