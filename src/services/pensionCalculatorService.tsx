@@ -1,4 +1,5 @@
 import CalculatorInput from "../interfaces/calculatorInput";
+import PensionProjection from "../interfaces/pensionProjection";
 
 const calculatePension = (
   currentAge: number,
@@ -8,20 +9,27 @@ const calculatePension = (
   desiredRetireIncome: number,
   yearlyInterest: number,
   transferredPension: number
-): Number[] => {
+): PensionProjection[] => {
   let timeBeforeRetire = retireAge - currentAge;
   let timeBeforeDeath = deathAge - currentAge;
-  let pensionArray = Array.from({ length: timeBeforeDeath }, () => 0);
-  pensionArray[0] = transferredPension;
+  let pensionArray: PensionProjection[] = [];
 
+  pensionArray.push({ age: currentAge, pensionAmount: transferredPension });
+
+  // Accumulate pension until retirement
   for (let i = 1; i < timeBeforeRetire; i++) {
-    pensionArray[i] =
-      pensionArray[i - 1] * (1 + yearlyInterest) + monthlyInput * 12;
+    let newAmount =
+      pensionArray[i - 1].pensionAmount * (1 + yearlyInterest) +
+      monthlyInput * 12;
+    pensionArray.push({ age: currentAge + i, pensionAmount: newAmount });
   }
 
+  // Deplete pension after retirement
   for (let i = timeBeforeRetire; i < timeBeforeDeath; i++) {
-    pensionArray[i] =
-      pensionArray[i - 1] * (1 + yearlyInterest) - desiredRetireIncome;
+    let newAmount =
+      pensionArray[i - 1].pensionAmount * (1 + yearlyInterest) -
+      desiredRetireIncome;
+    pensionArray.push({ age: currentAge + i, pensionAmount: newAmount });
   }
 
   return pensionArray;

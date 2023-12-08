@@ -2,10 +2,19 @@ import { useEffect, useState } from "react";
 import "./PensionChart.css";
 import CalculatorInput from "../../interfaces/calculatorInput";
 import calculatePension from "../../services/pensionCalculatorService";
+import PensionProjection from "../../interfaces/pensionProjection";
+
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+} from "recharts";
 
 function PensionChart() {
-  const [dataArray, setDataArray] = useState<Number[]>([]); // Initialize dataArray as state
-
   let inputData: CalculatorInput = {
     currentAge: 26,
     retireAge: 65,
@@ -16,8 +25,10 @@ function PensionChart() {
     transferredPension: 0,
   };
 
+  const [projections, setprojections] = useState<PensionProjection[]>([]);
+
   useEffect(() => {
-    const projection = calculatePension(
+    const projections = calculatePension(
       inputData.currentAge,
       inputData.retireAge,
       inputData.deathAge,
@@ -26,20 +37,54 @@ function PensionChart() {
       inputData.yearlyInterest,
       inputData.transferredPension
     );
-    console.log(projection);
-    setDataArray(projection);
-  }, []);
+    console.log(projections);
+    setprojections(projections);
+  }, [inputData]);
 
   return (
     <>
       <h1>Daniel's Pension Chart</h1>
+
+      {/* Show in table format */}
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <th>Age</th>
+              <th>Pension Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            {projections.map((projection) => (
+              <tr>
+                <td>{projection.age}</td>
+                <td>{projection.pensionAmount}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <br />
+
       <div className="chart">
-        {dataArray.map((value, index) => (
-          <div className="bar" key={index}>
-            {index + inputData.currentAge} {value.toString()}{" "}
-            {/* Make sure to convert Number to string */}
-          </div>
-        ))}
+        <LineChart
+          width={600}
+          height={300}
+          data={projections}
+          margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
+        >
+          <XAxis dataKey="age" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Line
+            type="monotone"
+            dataKey="pensionAmount"
+            stroke="#8884d8"
+            activeDot={{ r: 8 }}
+          />
+        </LineChart>
       </div>
     </>
   );

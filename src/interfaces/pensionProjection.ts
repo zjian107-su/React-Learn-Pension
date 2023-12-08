@@ -1,6 +1,6 @@
 type PensionProjection = {
   age: number;
-  pensionPot: number;
+  pensionAmount: number;
 };
 
 export default PensionProjection;
