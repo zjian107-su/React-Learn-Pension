@@ -1,4 +1,3 @@
-import CalculatorInput from "../interfaces/calculatorInput";
 import PensionProjection from "../interfaces/pensionProjection";
 
 const calculatePension = (

@@ -15,7 +15,7 @@ import {
 } from "recharts";
 
 function PensionChart() {
-  let inputData: CalculatorInput = {
+  const [inputData, setInputData] = useState<CalculatorInput>({
     currentAge: 26,
     retireAge: 65,
     deathAge: 81,
@@ -23,7 +23,7 @@ function PensionChart() {
     desiredRetireIncome: 30000,
     yearlyInterest: 0.05,
     transferredPension: 0,
-  };
+  });
 
   const [projections, setprojections] = useState<PensionProjection[]>([]);
 
@@ -56,7 +56,7 @@ function PensionChart() {
           </thead>
           <tbody>
             {projections.map((projection) => (
-              <tr>
+              <tr key={projection.age}>
                 <td>{projection.age}</td>
                 <td>{projection.pensionAmount}</td>
               </tr>
