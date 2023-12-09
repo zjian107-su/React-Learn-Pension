@@ -17,33 +17,15 @@ import {
 
 function PensionChart() {
   const { pensionData } = useContext(PensionContext);
-
   const [projections, setProjections] = useState<PensionProjection[]>([]);
   const [minNum, setMinNum] = useState(0);
 
   useEffect(() => {
-    const newProjections = pensionCalculatorService(
-      pensionData.currentAge,
-      pensionData.retireAge,
-      pensionData.deathAge,
-      pensionData.personalInput,
-      pensionData.employerInput,
-      pensionData.desiredRetireIncome,
-      pensionData.yearlyInterest,
-      pensionData.transferredPension
-    );
-    console.log("newProjections", newProjections);
-    const newMinNum = pensionMinService(
-      pensionData.currentAge,
-      pensionData.retireAge,
-      pensionData.deathAge,
-      pensionData.personalInput,
-      pensionData.employerInput,
-      pensionData.desiredRetireIncome,
-      pensionData.yearlyInterest,
-      pensionData.transferredPension
-    );
-    console.log("newMinNum", newMinNum);
+    const newProjections = pensionCalculatorService(pensionData);
+    // console.log("newProjections", newProjections);
+
+    const newMinNum = pensionMinService(pensionData);
+    // console.log("newMinNum", newMinNum);
 
     setProjections(newProjections);
     setMinNum(newMinNum);
@@ -51,12 +33,11 @@ function PensionChart() {
 
   return (
     <>
-      <h1>Daniel's Pension Chart</h1>
-      {/* <h1>{projections}</h1> */}
-      <h1>{minNum}</h1>
+      <h2>Daniel's Pension Chart</h2>
+      <h3>Minimum Pension Fund Amount at 65: {minNum}</h3>
 
       {/* Show in table format */}
-      <div>
+      {/* <div>
         <table>
           <thead>
             <tr>
@@ -73,7 +54,7 @@ function PensionChart() {
             ))}
           </tbody>
         </table>
-      </div>
+      </div> */}
 
       <br />
 
@@ -82,7 +63,7 @@ function PensionChart() {
           width={600}
           height={300}
           data={projections}
-          margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
+          margin={{ top: 5, right: 20, bottom: 5, left: 30 }}
         >
           <XAxis dataKey="age" />
           <YAxis />

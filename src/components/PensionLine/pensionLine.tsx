@@ -29,16 +29,7 @@ function PensionLine() {
   }, [pensionData]);
 
   useEffect(() => {
-    let updatedRetiredmentAmount: number = pensionMinService(
-      pensionData.currentAge,
-      pensionData.retireAge,
-      pensionData.deathAge,
-      pensionData.personalInput,
-      pensionData.employerInput,
-      pensionData.desiredRetireIncome,
-      pensionData.yearlyInterest,
-      pensionData.transferredPension
-    );
+    let updatedRetiredmentAmount: number = pensionMinService(pensionData);
     setRetirementAmount(updatedRetiredmentAmount);
   }, [pensionData]);
 

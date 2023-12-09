@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import "./PensionForm.css";
 import { useForm } from "react-hook-form";
 import { PensionContext } from "../../context/PensionContext";
@@ -18,45 +18,43 @@ function PensionForm() {
       deathAge: 81,
       personalInput: 300,
       employerInput: 300,
-      desiredRetirementIncome: 30000,
+      desiredRetireIncome: 30000,
       yearlyInterest: 0.05,
       transferredPension: 0,
     },
   });
 
   const handleSubmitForm = (data: any) => {
-    console.log("data", data);
     setPensionData(data);
   };
 
+  // test the global state
+  // useEffect(() => {
+  //   console.log("PENSIONDATA", pensionData);
+  // }, [pensionData]);
+
   return (
     <>
-      <h1>Daniel's Pension Form</h1>
-      <form
-        onSubmit={handleSubmit((data) => {
-          setPensionData(data);
-        })}
-      >
-        <label htmlFor="desiredRetirementIncome">
-          Desired Retirement Income
-        </label>
+      <h2>Daniel's Pension Form</h2>
+      <form onSubmit={handleSubmit(handleSubmitForm)}>
+        <label htmlFor="desiredRetireIncome">Desired Retirement Income: </label>
         <input
-          type="text"
-          id="desiredRetirementIncome"
-          {...register("desiredRetirementIncome", {
+          type="number"
+          id="desiredRetireIncome"
+          {...register("desiredRetireIncome", {
             required: "Required",
-            pattern: { value: /^\d+$/, message: "Invalid age" },
+            setValueAs: (v) => parseInt(v),
           })}
         />
-        <p>{errors.desiredRetirementIncome?.message}</p>
+        <p>{errors.desiredRetireIncome?.message}</p>
 
-        <label htmlFor="personlyInput">Personal Monthly Input: </label>
+        <label htmlFor="personalInput">Personal Monthly Input: </label>
         <input
           type="text"
           id="personalInput"
           {...register("personalInput", {
             required: "Required",
-            pattern: { value: /^\d+$/, message: "Invalid age" },
+            setValueAs: (v) => parseInt(v),
           })}
         />
         <p>{errors.personalInput?.message}</p>
@@ -66,58 +64,63 @@ function PensionForm() {
           id="employerInput"
           {...register("employerInput", {
             required: "Required",
-            pattern: { value: /^\d+$/, message: "Invalid age" },
+            setValueAs: (v) => parseInt(v),
           })}
         />
         <p>{errors.employerInput?.message}</p>
 
-        <label htmlFor="retireAge">Retire Age:</label>
+        <label htmlFor="retireAge">Retire Age: </label>
         <input
-          type="text"
+          type="number"
           id="retireAge"
           {...register("retireAge", {
             required: "Required",
             min: { value: 18, message: "Age must be at least 18" },
             max: { value: 120, message: "Age must be under 120" },
-            pattern: { value: /^\d+$/, message: "Invalid age" },
+            setValueAs: (v) => parseInt(v),
           })}
         />
         <p>{errors.retireAge?.message}</p>
 
         <label htmlFor="transferredPension">Transferred Pension: </label>
         <input
-          type="text"
+          type="number"
           id="transferredPension"
           {...register("transferredPension", {
             required: "Required",
-            pattern: { value: /^\d+$/, message: "Invalid input" },
+            setValueAs: (v) => parseInt(v),
           })}
         />
+        <br />
 
         {/* OPTIONAL */}
 
         <br />
-        <label htmlFor="currentAge">Current Age:</label>
+        <h3>Default Assumption</h3>
+        <label htmlFor="currentAge">Current Age: </label>
         <input
+          type="number"
+          id="currentAge"
+          disabled
           {...register("currentAge", {
             required: "Required",
+
             min: { value: 18, message: "Age must be at least 18" },
             max: { value: 120, message: "Age must be under 120" },
-            pattern: { value: /^\d+$/, message: "Invalid age" },
+            setValueAs: (v) => parseInt(v),
           })}
-          type="text"
-          id="currentAge"
         />
-
+        <br />
         <label htmlFor="deathAge">Death Age:</label>
         <input
-          type="text"
+          type="number"
           id="deathAge"
+          disabled
           {...register("deathAge", {
             required: "Required",
             min: { value: 18, message: "Age must be at least 18" },
             max: { value: 120, message: "Age must be under 120" },
-            pattern: { value: /^\d+$/, message: "Invalid age" },
+            setValueAs: (v) => parseInt(v),
           })}
         />
 
@@ -126,9 +129,11 @@ function PensionForm() {
         <input
           type="text"
           id="yearlyInterest"
+          disabled
           {...register("yearlyInterest")}
         />
 
+        <br />
         <br />
 
         <input type="submit" value="Submit" />

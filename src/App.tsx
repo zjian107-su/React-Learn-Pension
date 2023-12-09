@@ -5,8 +5,6 @@ import PensionLine from "./components/PensionLine/pensionLine";
 import { PensionContext } from "./context/PensionContext";
 import CalculatorInput from "./interfaces/calculatorInput";
 
-import { ErrorBoundary } from "react-error-boundary";
-
 function App() {
   const [pensionData, setPensionData] = useState({
     currentAge: 26,
@@ -20,21 +18,18 @@ function App() {
   } as CalculatorInput);
 
   return (
-    <div>
+    <>
       <PensionContext.Provider value={{ pensionData, setPensionData }}>
         <h1>Daniel's Pension Tracker</h1>
-        <br />
-        <PensionLine />
-
-        <br />
-        <ErrorBoundary fallback={<div>Something went wrong in CHART</div>}>
-          <PensionChart />
-        </ErrorBoundary>
+        {/* <PensionLine /> */}
         <br />
 
         <PensionForm />
+        <br />
+
+        <PensionChart />
       </PensionContext.Provider>
-    </div>
+    </>
   );
 }
 
