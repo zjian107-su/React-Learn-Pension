@@ -40,8 +40,7 @@ allow the user to add current pension pots they may already have
 1. Submission:
 GitHub or equivalent repo
 1. Additional Notes:
-- Feel free to add any additional comments or explanations in a README.md
-file.
+- Feel free to add any additional comments or explanations in a README.md file.
 - If you face any challenges or limitations, document them along with your solution.
 
 ## Deadline

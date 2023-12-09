@@ -32,9 +32,11 @@ function PensionChart() {
   }, [pensionData]);
 
   return (
-    <>
-      <h2>Daniel's Pension Chart</h2>
-      <h3>Minimum Pension Fund Amount at 65: {minNum}</h3>
+    <div className="card bordered bg-amber-200">
+      <h2 className="text-3xl font-bold">📊Daniel's Pension Chart📊</h2>
+      <h3 className="text-xl font-bold">
+        Minimum Pension Fund Amount at 65: {minNum}
+      </h3>
 
       {/* Show in table format */}
       {/* <div>
@@ -78,7 +80,7 @@ function PensionChart() {
           <ReferenceLine y={minNum} label="Minimum Required" stroke="red" />
         </LineChart>
       </div>
-    </>
+    </div>
   );
 }
 

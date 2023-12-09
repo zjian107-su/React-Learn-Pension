@@ -19,7 +19,7 @@ function PensionForm() {
       personalInput: 300,
       employerInput: 300,
       desiredRetireIncome: 30000,
-      yearlyInterest: 0.05,
+      yearlyInterest: 0.049,
       transferredPension: 0,
     },
   });
@@ -34,11 +34,14 @@ function PensionForm() {
   // }, [pensionData]);
 
   return (
-    <>
-      <h2>Daniel's Pension Form</h2>
+    <div className="card bordered bg-green-100">
+      <h2 className="text-3xl font-bold">📓Daniel's Pension Form📓</h2>
       <form onSubmit={handleSubmit(handleSubmitForm)}>
-        <label htmlFor="desiredRetireIncome">Desired Retirement Income: </label>
+        <label className="label label-text" htmlFor="desiredRetireIncome">
+          Desired Retirement Income:{" "}
+        </label>
         <input
+          className="input input-bordered w-full max-w-xs"
           type="number"
           id="desiredRetireIncome"
           {...register("desiredRetireIncome", {
@@ -46,10 +49,13 @@ function PensionForm() {
             setValueAs: (v) => parseInt(v),
           })}
         />
-        <p>{errors.desiredRetireIncome?.message}</p>
+        <p className="text-red-500">{errors.desiredRetireIncome?.message}</p>
 
-        <label htmlFor="personalInput">Personal Monthly Input: </label>
+        <label className="label label-text" htmlFor="personalInput">
+          Personal Monthly Input:{" "}
+        </label>
         <input
+          className="input input-bordered w-full max-w-xs"
           type="text"
           id="personalInput"
           {...register("personalInput", {
@@ -57,9 +63,12 @@ function PensionForm() {
             setValueAs: (v) => parseInt(v),
           })}
         />
-        <p>{errors.personalInput?.message}</p>
-        <label htmlFor="employerInput">Employer Monthly Input: </label>
+        <p className="text-red-500">{errors.personalInput?.message}</p>
+        <label className="label label-text" htmlFor="employerInput">
+          Employer Monthly Input:{" "}
+        </label>
         <input
+          className="input input-bordered w-full max-w-xs"
           type="text"
           id="employerInput"
           {...register("employerInput", {
@@ -67,10 +76,13 @@ function PensionForm() {
             setValueAs: (v) => parseInt(v),
           })}
         />
-        <p>{errors.employerInput?.message}</p>
+        <p className="text-red-500">{errors.employerInput?.message}</p>
 
-        <label htmlFor="retireAge">Retire Age: </label>
+        <label className="label label-text" htmlFor="retireAge">
+          Retire Age:{" "}
+        </label>
         <input
+          className="input input-bordered w-full max-w-xs"
           type="number"
           id="retireAge"
           {...register("retireAge", {
@@ -80,10 +92,13 @@ function PensionForm() {
             setValueAs: (v) => parseInt(v),
           })}
         />
-        <p>{errors.retireAge?.message}</p>
+        <p className="text-red-500">{errors.retireAge?.message}</p>
 
-        <label htmlFor="transferredPension">Transferred Pension: </label>
+        <label className="label label-text" htmlFor="transferredPension">
+          Transferred Pension:{" "}
+        </label>
         <input
+          className="input input-bordered w-full max-w-xs"
           type="number"
           id="transferredPension"
           {...register("transferredPension", {
@@ -96,12 +111,15 @@ function PensionForm() {
         {/* OPTIONAL */}
 
         <br />
-        <h3>Default Assumption</h3>
-        <label htmlFor="currentAge">Current Age: </label>
+        <h3 className="text-xl font-bold">Default Assumption</h3>
+        <label className="label label-text" htmlFor="currentAge">
+          Current Age:{" "}
+        </label>
         <input
           type="number"
           id="currentAge"
           disabled
+          className="input input-bordered w-full max-w-xs"
           {...register("currentAge", {
             required: "Required",
 
@@ -111,10 +129,13 @@ function PensionForm() {
           })}
         />
         <br />
-        <label htmlFor="deathAge">Death Age:</label>
+        <label className="label label-text" htmlFor="deathAge">
+          Death Age:
+        </label>
         <input
           type="number"
           id="deathAge"
+          className="input input-bordered w-full max-w-xs"
           disabled
           {...register("deathAge", {
             required: "Required",
@@ -125,10 +146,13 @@ function PensionForm() {
         />
 
         <br />
-        <label htmlFor="yearlyInterest">Yearly Interest (0-1): </label>
+        <label className="label label-text" htmlFor="yearlyInterest">
+          Yearly Interest (0-1):{" "}
+        </label>
         <input
           type="text"
           id="yearlyInterest"
+          className="input input-bordered w-full max-w-xs"
           disabled
           {...register("yearlyInterest")}
         />
@@ -136,9 +160,9 @@ function PensionForm() {
         <br />
         <br />
 
-        <input type="submit" value="Submit" />
+        <input className="btn btn-primary" type="submit" value="Submit" />
       </form>
-    </>
+    </div>
   );
 }
 

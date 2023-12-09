@@ -20,7 +20,7 @@ function App() {
   return (
     <>
       <PensionContext.Provider value={{ pensionData, setPensionData }}>
-        <h1>Daniel's Pension Tracker</h1>
+        <h1 className="text-5xl font-bold">✨Daniel's Pension Tracker✨</h1>
         {/* <PensionLine /> */}
         <br />
 
