@@ -1,10 +1,11 @@
 import PensionProjection from "../interfaces/pensionProjection";
 
-const calculatePension = (
+const pensionMinService = (
   currentAge: number,
   retireAge: number,
   deathAge: number,
-  monthlyInput: number,
+  personalInput: number,
+  employerInput: number,
   desiredRetireIncome: number,
   yearlyInterest: number,
   transferredPension: number
@@ -22,4 +23,4 @@ const calculatePension = (
   return pensionArray[0].pensionAmount;
 };
 
-export default calculatePension;
+export default pensionMinService;

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import calculatePension from "../services/pensionCalculatorService";
+import pensionCalculatorService from "../services/pensionCalculatorService";
 import CalculatorInput from "../interfaces/calculatorInput";
 import PensionProjection from "../interfaces/pensionProjection";
 
@@ -13,11 +13,12 @@ const usePensionCalculator = (initialValues: CalculatorInput) => {
   >([]);
 
   useEffect(() => {
-    const projection: PensionProjection[] = calculatePension(
+    const projection: PensionProjection[] = pensionCalculatorService(
       inputs.currentAge,
       inputs.retireAge,
       inputs.deathAge,
-      inputs.monthlyInput,
+      inputs.personalInput,
+      inputs.employerInput,
       inputs.desiredRetireIncome,
       inputs.yearlyInterest,
       inputs.transferredPension

@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./PensionForm.css";
 import { useForm } from "react-hook-form";
+import { PensionContext } from "../../context/PensionContext";
+import CalculatorInput from "../../interfaces/calculatorInput";
 
 function PensionForm() {
+  const { pensionData, setPensionData } = useContext(PensionContext);
+
   const {
     register,
     handleSubmit,
@@ -12,7 +16,7 @@ function PensionForm() {
       currentAge: 25,
       retireAge: 65,
       deathAge: 81,
-      personlyInput: 300,
+      personalInput: 300,
       employerInput: 300,
       desiredRetirementIncome: 30000,
       yearlyInterest: 0.05,
@@ -20,12 +24,17 @@ function PensionForm() {
     },
   });
 
+  const handleSubmitForm = (data: any) => {
+    console.log("data", data);
+    setPensionData(data);
+  };
+
   return (
     <>
       <h1>Daniel's Pension Form</h1>
       <form
         onSubmit={handleSubmit((data) => {
-          console.log(data);
+          setPensionData(data);
         })}
       >
         <label htmlFor="desiredRetirementIncome">
@@ -44,13 +53,13 @@ function PensionForm() {
         <label htmlFor="personlyInput">Personal Monthly Input: </label>
         <input
           type="text"
-          id="personlyInput"
-          {...register("personlyInput", {
+          id="personalInput"
+          {...register("personalInput", {
             required: "Required",
             pattern: { value: /^\d+$/, message: "Invalid age" },
           })}
         />
-        <p>{errors.personlyInput?.message}</p>
+        <p>{errors.personalInput?.message}</p>
         <label htmlFor="employerInput">Employer Monthly Input: </label>
         <input
           type="text"

@@ -1,38 +1,62 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import "./PensionLine.css";
 import CalculatorInput from "../../interfaces/calculatorInput";
-import calculatePension from "../../services/pensionCalculatorService";
 import PensionProjection from "../../interfaces/pensionProjection";
 import pensionMinService from "../../services/pensionMinService";
+import { PensionContext } from "../../context/PensionContext";
 
 function PensionLine() {
-  const [inputData, setInputData] = useState<CalculatorInput>({
-    currentAge: 26,
-    retireAge: 65,
-    deathAge: 81,
-    monthlyInput: 300,
-    desiredRetireIncome: 30000,
-    yearlyInterest: 0.05,
-    transferredPension: 0,
-  });
   const [retirementAmount, setRetirementAmount] = useState(0);
+  const { pensionData, setPensionData } = useContext(PensionContext);
+
+  const clickHandler = () => {
+    setPensionData({
+      currentAge: 26,
+      retireAge: 27,
+      deathAge: 28,
+      personalInput: 29,
+      employerInput: 30,
+      // monthlyInput: 28,
+      desiredRetireIncome: 31,
+      yearlyInterest: 0.05,
+      transferredPension: 100,
+    });
+  };
+
+  // test the global state
+  useEffect(() => {
+    console.log(pensionData);
+  }, [pensionData]);
 
   useEffect(() => {
     let updatedRetiredmentAmount: number = pensionMinService(
-      inputData.currentAge,
-      inputData.retireAge,
-      inputData.deathAge,
-      inputData.monthlyInput,
-      inputData.desiredRetireIncome,
-      inputData.yearlyInterest,
-      inputData.transferredPension
+      pensionData.currentAge,
+      pensionData.retireAge,
+      pensionData.deathAge,
+      pensionData.personalInput,
+      pensionData.employerInput,
+      pensionData.desiredRetireIncome,
+      pensionData.yearlyInterest,
+      pensionData.transferredPension
     );
     setRetirementAmount(updatedRetiredmentAmount);
-  }, [retirementAmount]);
+  }, [pensionData]);
 
   return (
     <>
+      <h1>{pensionData.currentAge}</h1>
+      <h1>{pensionData.retireAge}</h1>
+      <h1>{pensionData.deathAge}</h1>
+      <h1>{pensionData.personalInput}</h1>
+      <h1>{pensionData.employerInput}</h1>
+      <h1>{pensionData.desiredRetireIncome}</h1>
+      <h1>{pensionData.yearlyInterest}</h1>
+      <h1>{pensionData.transferredPension}</h1>
+
       <h1>{retirementAmount}</h1>
+      <button onClick={clickHandler}>
+        Click to change the state form the global state
+      </button>
     </>
   );
 }

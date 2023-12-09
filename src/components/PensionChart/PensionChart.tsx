@@ -1,62 +1,59 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import "./PensionChart.css";
-import CalculatorInput from "../../interfaces/calculatorInput";
-import calculatePension from "../../services/pensionCalculatorService";
+import pensionCalculatorService from "../../services/pensionCalculatorService";
 import PensionProjection from "../../interfaces/pensionProjection";
 import pensionMinService from "../../services/pensionMinService";
+import { PensionContext } from "../../context/PensionContext";
 
 import {
   LineChart,
   Line,
   XAxis,
   YAxis,
-  CartesianGrid,
   Tooltip,
   Legend,
   ReferenceLine,
 } from "recharts";
 
 function PensionChart() {
-  const [inputData, setInputData] = useState<CalculatorInput>({
-    currentAge: 26,
-    retireAge: 65,
-    deathAge: 81,
-    monthlyInput: 300,
-    desiredRetireIncome: 30000,
-    yearlyInterest: 0.05,
-    transferredPension: 0,
-  });
+  const { pensionData } = useContext(PensionContext);
 
-  const [projections, setprojections] = useState<PensionProjection[]>([]);
-  const [minNum, setMinNumber] = useState(0);
+  const [projections, setProjections] = useState<PensionProjection[]>([]);
+  const [minNum, setMinNum] = useState(0);
 
   useEffect(() => {
-    const projections = calculatePension(
-      inputData.currentAge,
-      inputData.retireAge,
-      inputData.deathAge,
-      inputData.monthlyInput,
-      inputData.desiredRetireIncome,
-      inputData.yearlyInterest,
-      inputData.transferredPension
+    const newProjections = pensionCalculatorService(
+      pensionData.currentAge,
+      pensionData.retireAge,
+      pensionData.deathAge,
+      pensionData.personalInput,
+      pensionData.employerInput,
+      pensionData.desiredRetireIncome,
+      pensionData.yearlyInterest,
+      pensionData.transferredPension
     );
-    const minNum = pensionMinService(
-      inputData.currentAge,
-      inputData.retireAge,
-      inputData.deathAge,
-      inputData.monthlyInput,
-      inputData.desiredRetireIncome,
-      inputData.yearlyInterest,
-      inputData.transferredPension
+    console.log("newProjections", newProjections);
+    const newMinNum = pensionMinService(
+      pensionData.currentAge,
+      pensionData.retireAge,
+      pensionData.deathAge,
+      pensionData.personalInput,
+      pensionData.employerInput,
+      pensionData.desiredRetireIncome,
+      pensionData.yearlyInterest,
+      pensionData.transferredPension
     );
+    console.log("newMinNum", newMinNum);
 
-    setprojections(projections);
-    setMinNumber(minNum);
-  }, [inputData]);
+    setProjections(newProjections);
+    setMinNum(newMinNum);
+  }, [pensionData]);
 
   return (
     <>
       <h1>Daniel's Pension Chart</h1>
+      {/* <h1>{projections}</h1> */}
+      <h1>{minNum}</h1>
 
       {/* Show in table format */}
       <div>
