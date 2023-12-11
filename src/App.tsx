@@ -1,35 +1,31 @@
 import React, { useState } from "react";
 import PensionForm from "./components/PensionForm/PensionForm";
 import PensionChart from "./components/PensionChart/PensionChart";
-import PensionLine from "./components/PensionLine/pensionLine";
-import { PensionContext } from "./context/PensionContext";
-import CalculatorInput from "./interfaces/calculatorInput";
+import PensionTest from "./components/PensionTest/pensionTest";
+import { PensionProvider } from "./context/PensionContext";
 
 function App() {
-  const [pensionData, setPensionData] = useState({
-    currentAge: 26,
-    retireAge: 65,
-    deathAge: 81,
-    personalInput: 300,
-    employerInput: 300,
-    desiredRetireIncome: 69500,
-    yearlyInterest: 0.05,
-    transferredPension: 0,
-  } as CalculatorInput);
-
   return (
-    <>
-      <PensionContext.Provider value={{ pensionData, setPensionData }}>
+    <div>
+      <PensionProvider>
         <h1 className="text-5xl font-bold">✨Daniel's Pension Tracker✨</h1>
-        {/* <PensionLine /> */}
+        <br />
+        <PensionTest />
+
         <br />
 
-        <PensionForm />
-        <br />
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-stretch">
+          <div className="flex-1 bg-green-100">
+            <PensionForm />
+          </div>
+          <div className="flex-1 bg-amber-200">
+            <PensionChart />
+          </div>
+        </div>
 
-        <PensionChart />
-      </PensionContext.Provider>
-    </>
+        <br />
+      </PensionProvider>
+    </div>
   );
 }
 

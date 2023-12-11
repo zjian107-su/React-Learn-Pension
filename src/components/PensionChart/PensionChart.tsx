@@ -1,5 +1,4 @@
 import { useEffect, useState, useContext } from "react";
-import "./PensionChart.css";
 import pensionCalculatorService from "../../services/pensionCalculatorService";
 import PensionProjection from "../../interfaces/pensionProjection";
 import pensionMinService from "../../services/pensionMinService";
@@ -32,7 +31,7 @@ function PensionChart() {
   }, [pensionData]);
 
   return (
-    <div className="card bordered bg-amber-200">
+    <div className="card bordered">
       <h2 className="text-3xl font-bold">📊Daniel's Pension Chart📊</h2>
       <h3 className="text-xl font-bold">
         Minimum Pension Fund Amount at 65: {minNum}
