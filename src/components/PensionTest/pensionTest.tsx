@@ -6,8 +6,7 @@ import { PensionContext } from "../../context/PensionContext";
 // when you click the button, it should change the gloobal state
 function PensionTest() {
   const [retirementAmount, setRetirementAmount] = useState(0);
-  const { pensionData, setPensionData, devMode, setDevMode } =
-    useContext(PensionContext);
+  const { pensionData, setPensionData, devMode } = useContext(PensionContext);
 
   const clickHandler = () => {
     setPensionData({
@@ -23,10 +22,6 @@ function PensionTest() {
     });
   };
 
-  const toggleDevMode = () => {
-    setDevMode(!devMode);
-  };
-
   // test the global state
   useEffect(() => {
     console.log(pensionData);
@@ -39,13 +34,8 @@ function PensionTest() {
 
   return (
     <>
-      <div className="flex justify-start">
-        <button className="btn btn-secondary" onClick={toggleDevMode}>
-          Toggle Dev Mode
-        </button>
-      </div>
-      {devMode && (
-        <div className="card bordered bg-rose-300">
+      {devMode ? (
+        <div className="card bordered bg-rose-300 space-y-3">
           <h2 className="text-3xl font-bold">🧪Daniel's Pension Test🧪</h2>
           <h1>Current Age: {pensionData.currentAge}</h1>
           <h1>Retire Age: {pensionData.retireAge}</h1>
@@ -60,14 +50,14 @@ function PensionTest() {
             Minimum Pension Amount To Retire: {retirementAmount}
           </h1>
           <div className="flex mt-4">
-            <button className="btn btn-primary w-auto" onClick={clickHandler}>
+            <button className="btn btn-primary w-full" onClick={clickHandler}>
               Click to change desired retire income and transferred pension
             </button>
           </div>
 
           <br />
         </div>
-      )}
+      ) : null}
     </>
   );
 }

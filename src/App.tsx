@@ -5,26 +5,34 @@ import PensionTest from "./components/PensionTest/pensionTest";
 import { PensionContext, PensionProvider } from "./context/PensionContext";
 
 function App() {
-  return (
-    <div>
-      <PensionProvider>
-        <h1 className="text-5xl font-bold">✨Daniel's Pension Tracker✨</h1>
-        <br />
 
-        <PensionTest />
+   const { devMode, setDevMode } = useContext(PensionContext);
 
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-stretch">
-          <div className="flex-1 bg-green-100">
-            <PensionForm />
-          </div>
-          <div className="flex-1 bg-amber-200">
-            <PensionChart />
-          </div>
-        </div>
-        <br />
-      </PensionProvider>
-    </div>
-  );
+   const toggleDevMode = () => {
+     setDevMode(!devMode);
+   };
+
+   return (
+     <div className="max-w-screen-2xl mx-auto px-6 my-6 space-y-6">
+       <header>
+         <h1 className="text-5xl font-bold">✨Daniel's Pension Tracker✨</h1>
+         <br />
+         <div className="flex justify-start">
+           <button className="btn btn-secondary" onClick={toggleDevMode}>
+             Toggle Dev Mode
+           </button>
+         </div>
+       </header>
+
+       <PensionTest />
+
+       <div className="flex flex-col gap-6 lg:flex-row lg:items-stretch">
+         <PensionForm className="flex-1" />
+         <PensionChart className="flex-1" />
+       </div>
+       <br />
+     </div>
+   );
 }
 
 export default App;

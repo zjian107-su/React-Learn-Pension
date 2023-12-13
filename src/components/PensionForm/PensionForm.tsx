@@ -3,7 +3,11 @@ import { useForm } from "react-hook-form";
 import { PensionContext } from "../../context/PensionContext";
 import CalculatorInput from "../../interfaces/calculatorInput";
 
-function PensionForm() {
+type Props = {
+  className?: string;
+};
+
+function PensionForm({ className = "" }: Props) {
   const { pensionData, setPensionData } = useContext(PensionContext);
 
   const {
@@ -34,7 +38,7 @@ function PensionForm() {
 
   return (
     <>
-      <div className="card bordered">
+      <div className={`card bordered bg-green-100 ${className}`}>
         <h2 className="text-3xl font-bold">📓Daniel's Pension Form📓</h2>
         <form onSubmit={handleSubmit(handleSubmitForm)}>
           <label className="label label-text" htmlFor="desiredRetireIncome">
